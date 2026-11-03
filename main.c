@@ -90,7 +90,7 @@ int main(void) {
 				check_destroyed(whats_left, p1board, 2, logfile);
 				system("pause");
 				system("cls");
-				print_board(p2board, 10, 10, 1);
+				print_board(p2board, 10, 10, 2);
 				printf("\n");
 				print_board(p1board, 10, 10, 1);
 			}
