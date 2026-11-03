@@ -63,16 +63,26 @@ void place_ship(struct Ship ship, char board[][10], char israndom, FILE* logfile
 	int direction, x, y;
 
 	do {
+		if (flag == 1 && israndom != 'y') {
+			system("cls");
+			printf("INVALID SPACE\n");
+		}
+
 		flag = 0;
 		if (israndom != 'y') {
-			system("cls");
+			
 			print_board(board, 10, 10, 1);
-			printf("input direction of %s (0/1) (horizontal/vertical): ", ship.name);
-			scanf("%d", &direction);
 
-			printf("input coordinates of ship (x y): ");
-			scanf("%d", &x);
-			scanf("%d", &y);
+			do {
+				printf("input direction of %s (0/1) (horizontal/vertical): ", ship.name);
+				scanf("%d", &direction);
+			} while(direction != 0 && direction != 1);
+
+			do {
+				printf("input coordinates of ship (x y): ");
+				scanf("%d", &x);
+				scanf("%d", &y);
+			} while (x < 0 || x >= 10 || y < 0 || y >= 10);
 		}
 		else {
 			direction = rand() % 2;
@@ -84,17 +94,11 @@ void place_ship(struct Ship ship, char board[][10], char israndom, FILE* logfile
 			if (x < 0 || x + ship.size > 10 ||
 				y < 0 || y >= 10) {
 				flag = 1;
-				if (israndom != 'y') {
-					printf("INVALID SPACE\n");
-				}
 			}
 
 			//check if it can be placed there
 			for (int i = x; i < ship.size + x; i++) {
 				if (board[y][i] != '~') {
-					if (israndom != 'y') {
-						printf("INVALID SPACE\n");
-					}
 					flag = 1;
 					break;
 				}
@@ -111,17 +115,11 @@ void place_ship(struct Ship ship, char board[][10], char israndom, FILE* logfile
 			if (y < 0 || y + ship.size > 10 ||
 				x < 0 || x >= 10) {
 				flag = 1;
-				if (israndom != 'y') {
-					printf("INVALID SPACE\n");
-				}
 			}
 
 			//check for valid placement
 			for (int i = y; i < ship.size + y; i++) {
 				if (board[i][x] != '~') {
-					if (israndom != 'y') {
-						printf("INVALID SPACE\n");
-					}
 					flag = 1;
 					break;
 				}
