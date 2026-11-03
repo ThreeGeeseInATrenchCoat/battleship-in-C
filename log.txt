@@ -1,0 +1,69 @@
+EXAMPLE LOG
+
+CPU ship placement:
+Ship carrier placed at (1, 3) direction: 1
+Ship battleship placed at (5, 1) direction: 1
+Ship cruiser placed at (2, 5) direction: 0
+Ship submarine placed at (0, 3) direction: 1
+Ship patrol boat placed at (3, 0) direction: 1
+
+Player ship placement:
+Ship carrier placed at (5, 3) direction: 1
+Ship battleship placed at (0, 0) direction: 0
+Ship cruiser placed at (6, 0) direction: 0
+Ship submarine placed at (7, 1) direction: 0
+Ship patrol boat placed at (4, 2) direction: 0
+Player HIT at (1, 5)
+CPU MISS at (2, 3)
+Player HIT at (1, 5)
+CPU MISS at (2, 2)
+Player HIT at (1, 5)
+CPU MISS at (2, 5)
+Player HIT at (1, 5)
+
+Player destroyed CPU battleship
+
+CPU MISS at (2, 7)
+Player HIT at (1, 3)
+CPU MISS at (2, 8)
+Player HIT at (1, 3)
+
+Player destroyed CPU patrol boat
+
+CPU MISS at (2, 0)
+Player HIT at (1, 0)
+CPU MISS at (2, 9)
+Player HIT at (1, 0)
+CPU HIT at (2, 6)
+Player MISS at (1, 5)
+CPU MISS at (2, 0)
+Player HIT at (1, 0)
+
+Player destroyed CPU submarine
+
+CPU MISS at (2, 9)
+Player HIT at (1, 1)
+CPU MISS at (2, 4)
+Player HIT at (1, 1)
+CPU HIT at (2, 5)
+Player HIT at (1, 1)
+CPU HIT at (2, 9)
+Player HIT at (1, 1)
+CPU MISS at (2, 9)
+Player HIT at (1, 1)
+
+Player destroyed CPU carrier
+
+CPU MISS at (2, 8)
+Player HIT at (1, 2)
+CPU MISS at (2, 4)
+Player HIT at (1, 3)
+CPU MISS at (2, 8)
+Player HIT at (1, 4)
+
+Player destroyed CPU cruiser
+
+Player wins!
+
+Player hits: 17 misses: 1 hit/miss ratio: 17.00
+CPU hits: 3 misses: 14 hit/miss ratio: 0.21
