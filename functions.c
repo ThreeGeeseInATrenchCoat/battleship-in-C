@@ -34,12 +34,12 @@ void init_board(char board[][10], int rows, int cols, char symbol) {
 }
 
 void print_board(char board[][10], int rows, int cols, int player) {
-	printf("  0 1 2 3 4 5 6 7 8 9\n");
+	printf("  1 2 3 4 5 6 7 8 9 10\n");
 	for (int i = 0; i < rows; i++) {
-		printf("%d ", i);
+		printf("%c ", i + 'a');		//for letters instead of numbers
 		for (int j = 0; j < cols; j++) {
 
-			//dont give away cpu positions
+			//keep from revealing CPU ships by printing ~ instead of ship characters
 			if (player == 2) {
 				if (board[i][j] != '~' && board[i][j] != '*' && board[i][j] != '#') {
 					printf("~ ");
@@ -60,16 +60,18 @@ void print_board(char board[][10], int rows, int cols, int player) {
 void place_ship(struct Ship ship, char board[][10], char israndom, FILE* logfile) {
 
 	int flag = 0;
-	int direction, x, y;
+	int direction, x;
+	char y = NULL;
 
 	do {
-		if (flag == 1 && israndom != 'y') {
+		if (flag == 1 && israndom == 'n') {
 			system("cls");
 			printf("INVALID SPACE\n");
 		}
 
 		flag = 0;
-		if (israndom != 'y') {
+
+		if (israndom == 'n') {
 			
 			print_board(board, 10, 10, 1);
 
@@ -81,7 +83,9 @@ void place_ship(struct Ship ship, char board[][10], char israndom, FILE* logfile
 			do {
 				printf("input coordinates of ship (x y): ");
 				scanf("%d", &x);
-				scanf("%d", &y);
+				scanf(" %c", &y);
+				x--;
+				y -= 'a';
 			} while (x < 0 || x >= 10 || y < 0 || y >= 10);
 		}
 		else {
@@ -91,12 +95,13 @@ void place_ship(struct Ship ship, char board[][10], char israndom, FILE* logfile
 		}
 		if (direction == 0) {	//left/right
 
+			//check if ship exceeds board size and if coordinates given are out of bounds
 			if (x < 0 || x + ship.size > 10 ||
 				y < 0 || y >= 10) {
 				flag = 1;
 			}
 
-			//check if it can be placed there
+			//check if ship intersects with another ship
 			for (int i = x; i < ship.size + x; i++) {
 				if (board[y][i] != '~') {
 					flag = 1;
@@ -117,7 +122,7 @@ void place_ship(struct Ship ship, char board[][10], char israndom, FILE* logfile
 				flag = 1;
 			}
 
-			//check for valid placement
+			//check if ship exceeds board size and if coordinates given are out of bounds
 			for (int i = y; i < ship.size + y; i++) {
 				if (board[i][x] != '~') {
 					flag = 1;
@@ -125,6 +130,7 @@ void place_ship(struct Ship ship, char board[][10], char israndom, FILE* logfile
 				}
 			}
 
+			//check if ship intersects with another ship
 			if (flag == 0) {
 				for (int i = y; i < ship.size + y; i++) {
 					board[i][x] = ship.character;
@@ -136,50 +142,67 @@ void place_ship(struct Ship ship, char board[][10], char israndom, FILE* logfile
 }
 
 int take_turn(char board[][10],int random, FILE* logfile) {
-	int x, y, flag;
+	int x, flag;
+	char y = NULL;
 	do {
 		flag = 0;
 		if (random == 0) {
-			printf("input coordinates to strike: ");
-			scanf("%d", &x);
-			scanf("%d", &y);
+
+			//check if coordinates are out of bounds
+			do {
+				printf("input coordinates to strike: ");
+				scanf("%d", &x);
+				scanf(" %c", &y);
+				x--;
+				y -= 97;
+			} while (x < 0 || x >= 10 || y < 0 || y >= 10);
+
+		}
+		else {
+			x = rand() % 10;
+			y = rand() % 10;
 		}
 		if (random == 1) {
 			x = rand() % 10;
 			y = rand() % 10;
 		}
 
+		//check if coordinates have been struck
 		if (board[y][x] == '*' || board[y][x] == '#') {
 			if (random == 0) {
 				printf("cannot strike same place twice.\n");
 			}		
 			flag = 1;
 		}
+
+		//check for miss
 		else if (board[y][x] == '~') {
 
 			if (random == 0) {
 				fprintf(logfile, "Player MISS at (%d, %d)\n", random + 1, x, y);
+				printf("Player MISS\n");
 			}
 			else {
 				fprintf(logfile, "CPU MISS at (%d, %d)\n", random + 1, x, y);
+				printf("CPU MISS\n");
 			}
 
-			printf("player %d ", random + 1);
-			printf("MISS\n");
 			board[y][x] = '*';
 			return 0;
 		}
 		else {
 			
+			//check for hit
+			//use random as player number as random will only be used for a cpu turn, avoids extra variables in function
 			if (random == 0) {
-				fprintf(logfile, "Player HIT at (%d, %d)\n", random + 1, x, y);
+				fprintf(logfile, "Player HIT at (%d, %d)\n", x, y);
+				printf("Player HIT\n");
 			}
 			else {
-				fprintf(logfile, "CPU HIT at (%d, %d)\n", random + 1, x, y);
+				fprintf(logfile, "CPU HIT at (%d, %d)\n", x, y);
+				printf("CPU HIT\n");
 			}
 
-			printf("player %d ", random + 1);
-			printf("HIT\n");
 			board[y][x] = '#';
 			return 1;
 		}
@@ -188,6 +211,7 @@ int take_turn(char board[][10],int random, FILE* logfile) {
 }
 
 void check_destroyed(int whats_left[], char board[][10], int player, FILE* logfile) {
+	//could be an array but eh
 	int carrier = 0;
 	int patrol_boat = 0;
 	int battleship = 0;
@@ -196,6 +220,8 @@ void check_destroyed(int whats_left[], char board[][10], int player, FILE* logfi
 
 	for (int i = 0; i < 10; i++) {
 		for (int j = 0; j < 10; j++) {
+			
+			//if there exists a ship character on the board, set its variable to 1 so we know it has not been destroyed yet
 			if (board[i][j] == 'C') {
 				carrier = 1;
 			}
