@@ -59,6 +59,7 @@ int main(void) {
 	place_ship(cruiser, p1board, is_random, logfile);
 	place_ship(submarine, p1board, is_random, logfile);
 	place_ship(patrol_boat, p1board, is_random, logfile);
+	fprintf(logfile, "\n");
 
 	print_board(p2board, 10, 10, 2);
 	print_board(p1board, 10, 10, 1);
