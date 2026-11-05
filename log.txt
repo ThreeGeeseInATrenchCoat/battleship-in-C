@@ -1,69 +1,70 @@
 EXAMPLE LOG
 
 CPU ship placement:
-Ship carrier placed at (1, 3) direction: 1
-Ship battleship placed at (5, 1) direction: 1
-Ship cruiser placed at (2, 5) direction: 0
-Ship submarine placed at (0, 3) direction: 1
-Ship patrol boat placed at (3, 0) direction: 1
+Ship carrier placed at (9, d) direction: 1
+Ship battleship placed at (3, a) direction: 1
+Ship cruiser placed at (8, d) direction: 1
+Ship submarine placed at (5, e) direction: 1
+Ship patrol boat placed at (5, i) direction: 0
 
 Player ship placement:
-Ship carrier placed at (5, 3) direction: 1
-Ship battleship placed at (0, 0) direction: 0
-Ship cruiser placed at (6, 0) direction: 0
-Ship submarine placed at (7, 1) direction: 0
-Ship patrol boat placed at (4, 2) direction: 0
-Player HIT at (1, 5)
-CPU MISS at (2, 3)
-Player HIT at (1, 5)
-CPU MISS at (2, 2)
-Player HIT at (1, 5)
-CPU MISS at (2, 5)
-Player HIT at (1, 5)
+Ship carrier placed at (10, e) direction: 1
+Ship battleship placed at (3, d) direction: 1
+Ship cruiser placed at (7, d) direction: 1
+Ship submarine placed at (8, b) direction: 1
+Ship patrol boat placed at (2, b) direction: 1
+
+Player HIT at (3, c)
+CPU MISS at (8, i)
+Player HIT at (3, d)
+CPU HIT at (10, g)
+Player HIT at (3, b)
+CPU MISS at (4, j)
+Player HIT at (3, a)
 
 Player destroyed CPU battleship
 
-CPU MISS at (2, 7)
-Player HIT at (1, 3)
-CPU MISS at (2, 8)
-Player HIT at (1, 3)
-
-Player destroyed CPU patrol boat
-
-CPU MISS at (2, 0)
-Player HIT at (1, 0)
-CPU MISS at (2, 9)
-Player HIT at (1, 0)
-CPU HIT at (2, 6)
-Player MISS at (1, 5)
-CPU MISS at (2, 0)
-Player HIT at (1, 0)
+CPU MISS at (4, d)
+Player HIT at (5, e)
+CPU MISS at (5, h)
+Player MISS at (5, d)
+CPU MISS at (10, d)
+Player HIT at (5, f)
+CPU MISS at (6, f)
+Player HIT at (5, g)
 
 Player destroyed CPU submarine
 
-CPU MISS at (2, 9)
-Player HIT at (1, 1)
-CPU MISS at (2, 4)
-Player HIT at (1, 1)
-CPU HIT at (2, 5)
-Player HIT at (1, 1)
-CPU HIT at (2, 9)
-Player HIT at (1, 1)
-CPU MISS at (2, 9)
-Player HIT at (1, 1)
+CPU MISS at (9, b)
+Player HIT at (5, i)
+CPU MISS at (6, b)
+Player HIT at (6, i)
 
-Player destroyed CPU carrier
+Player destroyed CPU patrol boat
 
-CPU MISS at (2, 8)
-Player HIT at (1, 2)
-CPU MISS at (2, 4)
-Player HIT at (1, 3)
-CPU MISS at (2, 8)
-Player HIT at (1, 4)
+CPU MISS at (5, g)
+Player HIT at (8, d)
+CPU MISS at (1, c)
+Player HIT at (8, e)
+CPU MISS at (3, a)
+Player HIT at (8, f)
 
 Player destroyed CPU cruiser
+
+CPU MISS at (3, i)
+Player HIT at (9, d)
+CPU MISS at (9, j)
+Player HIT at (9, e)
+CPU MISS at (6, c)
+Player HIT at (9, f)
+CPU MISS at (4, h)
+Player HIT at (9, g)
+CPU MISS at (4, b)
+Player HIT at (9, h)
+
+Player destroyed CPU carrier
 
 Player wins!
 
 Player hits: 17 misses: 1 hit/miss ratio: 17.00
-CPU hits: 3 misses: 14 hit/miss ratio: 0.21
+CPU hits: 1 misses: 16 hit/miss ratio: 0.06
