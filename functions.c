@@ -138,7 +138,7 @@ void place_ship(struct Ship ship, char board[][10], char israndom, FILE* logfile
 			}
 		}
 	} while (flag == 1);
-	fprintf(logfile, "Ship %s placed at (%d, %d) direction: %d\n", ship.name, x, y, direction);
+	fprintf(logfile, "Ship %s placed at (%d, %c) direction: %d\n", ship.name, x + 1, y + 'a', direction);
 }
 
 int take_turn(char board[][10],int random, FILE* logfile) {
@@ -179,11 +179,11 @@ int take_turn(char board[][10],int random, FILE* logfile) {
 		else if (board[y][x] == '~') {
 
 			if (random == 0) {
-				fprintf(logfile, "Player MISS at (%d, %d)\n", random + 1, x, y);
+				fprintf(logfile, "Player MISS at (%d, %c)\n", x + 1, y + 'a');
 				printf("Player MISS\n");
 			}
 			else {
-				fprintf(logfile, "CPU MISS at (%d, %d)\n", random + 1, x, y);
+				fprintf(logfile, "CPU MISS at (%d, %c)\n", x + 1, y + 'a');
 				printf("CPU MISS\n");
 			}
 
@@ -195,11 +195,11 @@ int take_turn(char board[][10],int random, FILE* logfile) {
 			//check for hit
 			//use random as player number as random will only be used for a cpu turn, avoids extra variables in function
 			if (random == 0) {
-				fprintf(logfile, "Player HIT at (%d, %d)\n", x, y);
+				fprintf(logfile, "Player HIT at (%d, %c)\n", x + 1, y + 'a');
 				printf("Player HIT\n");
 			}
 			else {
-				fprintf(logfile, "CPU HIT at (%d, %d)\n", x, y);
+				fprintf(logfile, "CPU HIT at (%d, %c)\n", x + 1, y + 'a');
 				printf("CPU HIT\n");
 			}
 
